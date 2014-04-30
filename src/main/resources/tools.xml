@@ -1,0 +1,20 @@
+<tools>
+    <tool id="sqlserver-space-info" title="SQL Server::Space Info" >
+        <description>Provides detailed space information on drives and databases</description>
+
+        <parameters>
+            <parameter name="p_servers" title="Servers" type="string"
+                       required="false" multiple="true" suggestion="project_connections" 
+                       width="300" />
+            <parameter name="p_sort_by" title="Sort By" type="string"
+                       required="true" defaultValue="Database Name">
+                <values>
+                    <string>Database Name</string>
+                    <string>Database Size</string>
+                </values>
+            </parameter>
+        </parameters>
+
+        <output  script="sqlserver-space-info.groovy" type="html" />
+    </tool>
+</tools>

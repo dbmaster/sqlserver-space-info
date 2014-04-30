@@ -1,0 +1,67 @@
+select SERVERPROPERTY('MachineName')
+
+wmi query 
+
+Select name, FreeSpace, Size, Status, StatusInfo from Win32_LogicalDisk where DriveType=3
+
+
+(on error skip and mention that info is not availble)
+http://msdn.microsoft.com/en-us/library/aa394173%28v=vs.85%29.aspx#properties
+
+
+
+
+-- get list of dbs
+select  db.name, state=db.state_desc, recovery_mode=recovery_model_desc from sys.databases db
+
+-- open connection
+
+-- create temp table
+CREATE TABLE #VLF_temp
+(RecoveryUnitId  varchar(3),
+ FileID varchar(3), 
+ FileSize numeric(20,0),
+ StartOffset bigint, 
+ FSeqNo bigint, 
+ Status char(1),
+ Parity varchar(4), 
+ CreateLSN numeric(25,0))
+
+-- for each db
+
+use [dbname]
+
+select
+name,
+type_desc,
+location=physical_name,
+file_size =size/128.0,
+space_used=CAST(FILEPROPERTY(name, 'SpaceUsed') AS INT)/128.0, 
+-- free_space= file_size - space_used
+max_size, -- -1 means unlimited
+is_percent_growth, -- 1 means %, 0 means MegaBytes
+growth
+from 
+sys.database_files db
+
+truncate #VLF_temp
+
+INSERT INTO #VLF_temp EXEC ('DBCC LOGINFO')
+
+Virtual Files (for log file only) 
+
+select virtual_files=count(*) from #VLF_temp
+
+--https://www.simple-talk.com/sql/database-administration/monitoring-sql-server-virtual-log-file-fragmentation/
+
+
+Bad practices:
+
+     Default Data Growth (creates high number of VLF)
+
+     Auto shrink (use DBCC shrinkfile)
+
+     Naming conversion
+
+     Instant File Initialization
+     http://www.bradmcgehee.com/2010/07/instant-file-initialization-speeds-sql-server/

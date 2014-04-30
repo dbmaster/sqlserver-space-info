@@ -1,0 +1,80 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1415" measuredH="564" mockupW="1336" mockupH="482">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="79" y="82" w="948" h="107" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>roundedSolid</borderStyle>
+        <color>15658734</color>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::ComboBox" x="444" y="123" w="290" h="-1" measuredW="117" measuredH="46" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Database%20Size%0ADatabase%20Name</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::ComboBox" x="103" y="125" w="290" h="-1" measuredW="260" measuredH="24" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>DB%20Server%20of%20the%20project%20%28%20multi%20select%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="103" y="104" w="-1" h="-1" measuredW="41" measuredH="21" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Server</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="444" y="104" w="-1" h="-1" measuredW="44" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Sort%20By</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::SubTitle" x="88" y="231" w="-1" h="-1" measuredW="92" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Server%201</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::ProgressBar" x="402" y="309" w="257" h="20" measuredW="100" measuredH="20" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <indeterminate>false</indeterminate>
+        <scrollBarValue>93</scrollBarValue>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::DataGrid" x="88" y="284" w="800" h="110" measuredW="617" measuredH="111" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Drive%2C%20Total%20Size%20%28Mb%29%2C%20Free%20Size%20%28Mb%29%2C%20_________________________________________________%0AC%2C%2010000%2C%2020%20%0AD%2C%2020000%2C%2020%0AE%2C%202000%20%2C%201000</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::ProgressBar" x="402" y="336" w="463" h="20" measuredW="100" measuredH="20" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <indeterminate>false</indeterminate>
+        <scrollBarValue>96</scrollBarValue>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::ProgressBar" x="402" y="365" w="101" h="20" measuredW="100" measuredH="20" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <indeterminate>false</indeterminate>
+        <scrollBarValue>49</scrollBarValue>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::SubTitle" x="88" y="267" w="-1" h="-1" measuredW="46" measuredH="19" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Drives</text>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::SubTitle" x="88" y="409" w="-1" h="-1" measuredW="79" measuredH="19" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Databases</text>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::DataGrid" x="88" y="454" w="1002" h="110" measuredW="998" measuredH="111" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Database%20Name%2C%20DB%20State%2C%20Recovery%20Mode%2C%20File%20Name%2C%20Location%2C%20Total%20Size%2C%20Free%20Size%2C%20Max%20Size%2C%20Increase%2C%20Virtual%20Files%2C%20%20%25Total%20Size%2C%20%25%20Free%20Size%0A%20master%2C%20Online%2C%20Simple%2C%20master_data%2C%20c%3A%5C...%5Cmaster.mdf%2C%20200%2C%2020%2C%20ulimited%2C%2010%25%2C%2010%0A%20%2C%20%2C%2Cmaster_log%2C%20c%3A%5C...%5Cmaster.ldf%2C%2020000%2C%20200%2C%2010Gb%2C%2010%25%2C%202%0Amsdbm%2C%20%20Offine%2C%20Full%2C%20...</text>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::StickyNote" x="1129" y="133" w="286" h="238" measuredW="109" measuredH="123" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Use%20WMI%20with%20integrated%20authecation%20to%20get%20drives%20</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
