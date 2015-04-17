@@ -1,38 +1,34 @@
-/*
- *  File Version:  $Id: db-data-files.groovy 145 2013-05-22 18:10:44Z schristin $
- */
+import java.util.ArrayList
+import java.util.Iterator
+import java.util.List
+import java.util.Map.Entry
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
+import com.branegy.dbmaster.connection.ConnectionProvider
+import com.branegy.dbmaster.connection.Connector
+import com.branegy.dbmaster.connection.Dialect
+import com.branegy.dbmaster.core.Permission.Role
+import com.branegy.dbmaster.core.Project
+import com.branegy.dbmaster.model.DatabaseInfo
+import com.branegy.inventory.model.Database
+import com.branegy.service.connection.api.ConnectionService
+import com.branegy.service.connection.model.DatabaseConnection
 
-import com.branegy.dbmaster.connection.ConnectionProvider;
-import com.branegy.dbmaster.connection.Connector;
-import com.branegy.dbmaster.connection.Dialect;
-import com.branegy.dbmaster.core.Permission.Role;
-import com.branegy.dbmaster.core.Project;
-import com.branegy.dbmaster.model.DatabaseInfo;
-import com.branegy.inventory.model.Database;
-import com.branegy.service.connection.api.ConnectionService;
-import com.branegy.service.connection.model.DatabaseConnection;
+import java.sql.Statement
+import java.sql.ResultSet
 
-import java.sql.Statement;
-import java.sql.ResultSet;
+import com.branegy.dbmaster.connection.JdbcConnector
 
-import com.branegy.dbmaster.connection.JdbcConnector;
+import java.sql.Connection
 
-import java.sql.Connection;
+import com.jacob.activeX.ActiveXComponent
+import com.jacob.com.ComThread
+import com.jacob.com.Dispatch
+import com.jacob.com.EnumVariant
+import com.jacob.com.Variant
 
-import com.jacob.activeX.ActiveXComponent;
-import com.jacob.com.ComThread;
-import com.jacob.com.Dispatch;
-import com.jacob.com.EnumVariant;
-import com.jacob.com.Variant;
-
-import com.branegy.dbmaster.connection.JDBCDialect;
-import java.text.DecimalFormat;
-import com.jacob.com.ComThread;
+import com.branegy.dbmaster.connection.JDBCDialect
+import java.text.DecimalFormat
+import com.jacob.com.ComThread
 
 class DbInfo {
     String name;
@@ -193,7 +189,7 @@ for (DatabaseConnection connection : connections) {
                     max_size, -- -1 means unlimited
                     is_percent_growth, -- 1 means %, 0 means MegaBytes
                     growth
-                    from sys.database_files db;
+                    from sys.master_files db where db_name(database_id)='${i.name}';
                 """);
                 double dbSize = 0;
                 while (rs.next()){
