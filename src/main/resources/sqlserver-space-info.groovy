@@ -53,7 +53,7 @@ class DbFile{
     String error;
 }
 
-DecimalFormat format = new DecimalFormat("###,###,###,###,###.00");
+DecimalFormat format = new DecimalFormat("###,###,###,###,###");
 boolean sortByName = "Database Name".equalsIgnoreCase(p_sort_by);
 
 ConnectionService connectionSrv = dbm.getService(ConnectionService.class);
@@ -199,7 +199,7 @@ for (DatabaseConnection connection : connections) {
                                               fileSize:rs.getDouble(4),
                                               freeSize:rs.getDouble(4)-rs.getDouble(5),
                                               maxSize:rs.getInt(6),
-                                              growth:rs.getBoolean(7)?rs.getInt(8)+'%':rs.getInt(8)
+                                              growth:rs.getBoolean(7)?rs.getInt(8)+'%':format.format(rs.getInt(8)/128)
                                           ));
                 }
                 totalDbSize += dbSize;
@@ -224,7 +224,7 @@ for (DatabaseConnection connection : connections) {
         println "<th>Total Size (Mb)</th>";
         println "<th>Free Size (Mb)</th>";
         println "<th>Max Size (Mb)</th>";
-        println "<th>Increase Size</th>";
+        println "<th>Growth (% or Mb)</th>";
         println "<th>% Total Size of Server</th>";
         println "<th>% Free Size</th>";
         println "</tr>";
