@@ -1,5 +1,5 @@
 <tools>
-    <tool id="sqlserver-space-info" title="SQL Server::Space Info" >
+    <tool id="sqlserver-server-space-info" title="SQL Server::Server Space Info" >
         <description>Provides detailed space information on drives and databases</description>
 
         <parameters>
@@ -15,6 +15,24 @@
             </parameter>
         </parameters>
 
-        <output  script="sqlserver-space-info.groovy" type="html" />
+        <output  script="server-info.groovy" type="html" />
     </tool>
+
+
+    <tool id="sqlserver-db-space-info" title="SQL Server::Database Space Info" >
+        <description>Provides detailed space information on drives and databases</description>
+
+        <parameters>
+            <parameter name="p_server" title="Server" type="string"
+                       required="true" multiple="false" suggestion="project_connections"
+                       width="300" />
+
+            <parameter name="p_database" title="Database" type="string"
+                       required="true" multiple="false" width="300" />
+
+        </parameters>
+
+        <output  script="database-info.groovy" type="html" />
+    </tool>
+
 </tools>

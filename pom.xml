@@ -53,7 +53,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Tags>inventory,sqlserver</Tags>
                         <Author>slava.christin</Author>
-                        <Import-Package>io.dbmaster.api;version="1.7.0",!*</Import-Package>
+                        <Import-Package>io.dbmaster.api.groovy;version="1.7.0",!*</Import-Package>
                         <Embed-Dependency>*;type=!dll;inline=true;scope=compile,*;type=dll;inline=false</Embed-Dependency>
 
                         <!-- alternative solution for emded-dependency -->
