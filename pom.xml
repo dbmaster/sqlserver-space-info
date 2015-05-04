@@ -10,7 +10,7 @@
     <name>SQL Server::Space Info</name>
     <description>Provides detailed space information on drives and databases</description>
 
-    <version>0.2.4</version>
+    <version>0.2.5</version>
     <packaging>bundle</packaging>
 
     <parent>

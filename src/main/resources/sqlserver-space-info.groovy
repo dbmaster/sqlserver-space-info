@@ -230,8 +230,8 @@ for (DatabaseConnection connection : connections) {
         println "</tr>";
         dbInfoList
         .sort{a,b -> (sortByName
-            ? a.name.compareTo(b.name)
-            : a.dbSize == b.dbSize ? a.name.compareTo(b.name) : a.dbSize-b.dbSize)}
+            ? a.name.compareToIgnoreCase(b.name)
+            : a.dbSize == b.dbSize ? a.name.compareToIgnoreCase(b.name) : a.dbSize-b.dbSize)}
         .each{i ->
             item = dbFileListMap[i.name];
             item.eachWithIndex { j, index ->
