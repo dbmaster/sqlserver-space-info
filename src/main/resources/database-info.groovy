@@ -74,7 +74,7 @@ def tools = new DbmTools(dbm, logger, getBinding().out)
 def connection = tools.getConnection(p_server, p_database)
 
 println "<h2>Tables</h2>"
-tools.runQuery(connection, TABLE_QUERY)
+tools.print(connection, TABLE_QUERY)
 
 println "<h2>Indexes</h2>"
-tools.runQuery(connection, INDEX_QUERY)
+tools.print(connection, INDEX_QUERY)
