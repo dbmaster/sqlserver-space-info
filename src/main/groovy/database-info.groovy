@@ -23,6 +23,10 @@ def TABLE_QUERY = """
                     For XML PATH ('')
                 ), 2, 1000) compression_desc
         from sys.partitions p
+    ),
+    object_storage as ( -- TODO TEST PARTITIONING
+       select distinct i.object_id, fg.name as STORAGE  FROM sys.indexes i
+       INNER JOIN sys.filegroups fg ON i.data_space_id = fg.data_space_id where i.type in (0,1)
     )
     SELECT
             s.name AS SchemaName,
@@ -33,11 +37,13 @@ def TABLE_QUERY = """
             ps.data * 8.0 / 1024 AS DataSizeMb,
             (CASE WHEN (ps.used ) > ps.data THEN (ps.used ) - ps.data ELSE 0 END) * 8.0 / 1024 AS IndexSizeMb,
             (CASE WHEN (ps.reserved ) > ps.used THEN (ps.reserved ) - ps.used ELSE 0 END) * 8.0 / 1024 AS UnusedMb,
-            oc.compression_desc as TableCompression
+            oc.compression_desc as TableCompression,
+            os.storage            
     FROM ps
     INNER JOIN sys.all_objects o  ON ( ps.object_id = o.object_id )
     INNER JOIN sys.schemas s ON (o.schema_id = s.schema_id)
     LEFT JOIN object_compression AS oc ON oc.OBJECT_ID = o.OBJECT_ID
+    LEFT JOIN object_storage  AS os ON os.OBJECT_ID = o.OBJECT_ID
     WHERE o.type <> N'S' AND  o.type <> N'IT' -- S SYSTEM_TABLE, IT- INTERNAL_TABLE
     ORDER BY ps.data DESC"""
     
@@ -51,10 +57,12 @@ WITH database_indexes AS (
         max(i.type_desc) as IndexType,
         8 * SUM(a.used_pages) / 1024 AS IndexSizeMb,
         p.partition_number as PartitionNumber, 
-        p.data_compression_desc as CompressionType
+        p.data_compression_desc as CompressionType,
+        fg.name as FileGroup
     FROM sys.indexes AS i
     JOIN sys.partitions AS p ON p.OBJECT_ID = i.OBJECT_ID AND p.index_id = i.index_id
     JOIN sys.allocation_units AS a ON a.container_id = p.partition_id
+    JOIN sys.filegroups fg ON i.data_space_id = fg.data_space_id
     JOIN sys.objects AS o on i.object_id = o.object_id
     -- where i.type<>1 and i.type<>0 and i.is_primary_key=0 -- 0 - heap; 1 - clustered 
     WHERE o.is_ms_shipped = 0
