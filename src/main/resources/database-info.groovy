@@ -1,7 +1,8 @@
-import io.dbmaster.api.groovy.DbmTools
+import io.dbmaster.tools.DbmTools
 
 def TABLE_QUERY = """
-    WITH ps as (
+
+WITH ps as (
         SELECT
             ps.object_id,
             SUM ( CASE WHEN (ps.index_id < 2) THEN row_count    ELSE 0 END ) AS [rows],
@@ -33,10 +34,10 @@ def TABLE_QUERY = """
             o.name AS TableName,
             ps.rows as Rows,
             o.type_desc as Type,
-            (ps.reserved )* 8.0 / 1024 AS ReservedMb,
-            ps.data * 8.0 / 1024 AS DataSizeMb,
-            (CASE WHEN (ps.used ) > ps.data THEN (ps.used ) - ps.data ELSE 0 END) * 8.0 / 1024 AS IndexSizeMb,
-            (CASE WHEN (ps.reserved ) > ps.used THEN (ps.reserved ) - ps.used ELSE 0 END) * 8.0 / 1024 AS UnusedMb,
+            cast((ps.reserved )* 8.0 / 1024 as numeric(15,2)) AS ReservedMb,
+            cast(ps.data * 8.0 / 1024 as numeric(15,2)) AS DataSizeMb,
+            cast((CASE WHEN (ps.used ) > ps.data THEN (ps.used ) - ps.data ELSE 0 END) * 8.0 / 1024 as numeric(15,2)) AS IndexSizeMb,
+            cast((CASE WHEN (ps.reserved ) > ps.used THEN (ps.reserved ) - ps.used ELSE 0 END) * 8.0 / 1024 as numeric(15,2)) AS UnusedMb,
             oc.compression_desc as TableCompression,
             os.storage            
     FROM ps
@@ -45,7 +46,8 @@ def TABLE_QUERY = """
     LEFT JOIN object_compression AS oc ON oc.OBJECT_ID = o.OBJECT_ID
     LEFT JOIN object_storage  AS os ON os.OBJECT_ID = o.OBJECT_ID
     WHERE o.type <> N'S' AND  o.type <> N'IT' -- S SYSTEM_TABLE, IT- INTERNAL_TABLE
-    ORDER BY ps.data DESC"""
+    ORDER BY ps.data DESC
+"""
     
 def INDEX_QUERY = """
 WITH database_indexes AS (
@@ -53,8 +55,8 @@ WITH database_indexes AS (
         -- i.index_id AS IndexID,
         SCHEMA_NAME(o.schema_id) as SchemaName,
         OBJECT_NAME(i.object_id) AS TableName,
-        i.name AS IndexName,
-        max(i.type_desc) as IndexType,
+        ISNULL(i.name,'') AS IndexName,  
+        MAX(i.type_desc) as IndexType,
         8 * SUM(a.used_pages) / 1024 AS IndexSizeMb,
         p.partition_number as PartitionNumber, 
         p.data_compression_desc as CompressionType,
@@ -71,7 +73,8 @@ WITH database_indexes AS (
              i.index_id,
              i.name, 
              p.partition_number, 
-             p.data_compression_desc
+             p.data_compression_desc,
+             fg.name
 )
 SELECT * 
 FROM database_indexes 

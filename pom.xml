@@ -37,6 +37,16 @@
             <type>dll</type>
             <classifier>x86</classifier>
         </dependency>      
+
+<!-- TODO Fix compilation, no need to embedd this dependency
+        <dependency>
+            <groupId>io.dbmaster.tools</groupId>
+            <artifactId>dbmaster-tools</artifactId>
+            <version>0.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+-->
     </dependencies>
 
     <build>
@@ -50,7 +60,7 @@
                     <instructions>
                         <Tags>inventory,sqlserver</Tags>
                         <Author>slava.christin</Author>
-                        <Import-Package>io.dbmaster.api.groovy;version="1.10.0",!*</Import-Package>
+                        <Import-Package>io.dbmaster.api;version="1.10.0",io.dbmaster.tools;version="0.1.0",!*</Import-Package>
                         <Embed-Dependency>*;type=!dll;inline=true;scope=compile,*;type=dll;inline=false</Embed-Dependency>
 
                         <!-- alternative solution for emded-dependency -->
